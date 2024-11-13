@@ -1,0 +1,43 @@
+{% extends 'Navbar/ProjectNavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact List</title>
+</head>
+<body>
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Contact List</h2>
+            <form method="get" action="{% url 'contact_list' %}">
+                <div class="form-group">
+                    <label for="search">Search by name or email:</label>
+                    <input type="text" id="search" name="q" class="form-control" placeholder="Search contacts">
+                    <button type="submit" class="btn btn-primary mt-2">Search</button>
+                </div>
+            </form>
+
+            <ul class="list-group mt-4">
+                {% for contact in contacts %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>{{ contact.name }}</strong> - {{ contact.email }}
+                        </div>
+                        <div>
+                            <a href="{% url 'contact_delete' contact.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">No contacts found.</li>
+                {% endfor %}
+            </ul>
+
+            <a href="{% url 'contact_add' %}" class="btn btn-success mt-3">Add New Contact</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

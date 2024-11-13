@@ -1,0 +1,25 @@
+{% extends 'Navbar/ProjectNavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Contact</title>
+</head>
+<body>
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Delete Contact</h2>
+            <p>Are you sure you want to delete <strong>{{ contact.name }}</strong>?</p>
+            <form method="post" action="{% url 'contact_delete' contact.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                <a href="{% url 'contact_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>
